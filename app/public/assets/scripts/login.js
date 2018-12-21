@@ -4,7 +4,6 @@ $('document').ready(() => {
         let username = $('#username').val().trim();
         let password = $('#password').val().trim();
         $('#password-validation').addClass('hidden');
-        console.log(username, password);
 
         if(!validateForm()) return;
 
@@ -19,11 +18,11 @@ $('document').ready(() => {
             type: 'POST',
             data: user
         }).then(data => {
+            console.log(data);
             if(data.error) {
                 $('#password-validation').removeClass('hidden');
                 $('#password-validation').text(data.message);
             } else {
-                console.log(data);
                 $('#password-validation').removeClass('hidden');
                 $('#password-validation').text(data[0].username + ' logged in!');
             }
@@ -34,7 +33,8 @@ $('document').ready(() => {
         let username = $('#username').val().trim();
         let password = $('#password').val().trim();
         $('#password-validation').addClass('hidden');
-        console.log(username, password);
+
+        if(!validateForm()) return;
 
         let user = {
             username: username,
@@ -65,7 +65,8 @@ $('document').ready(() => {
 
     function validateForm() {
         let validated = true;
-        $('.validation-text').addClass('hidden');
+        $('#username-validation').addClass('hidden');
+        $('#password-validation').addClass('hidden');
 
         if(!$('#username').val().trim()) {
             $('#username-validation').removeClass('hidden');
