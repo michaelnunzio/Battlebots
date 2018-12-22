@@ -12,5 +12,51 @@ CREATE TABLE users (
 
 CREATE INDEX ix_username ON users(username);
 
-INSERT INTO users (username, password)
-VALUES ('bob', '1234');
+CREATE TABLE robot_parts (
+	id INT AUTO_INCREMENT NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    cost NUMERIC(18,2) NOT NULL,
+    damage INT NULL,
+    armor INT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE user_wallets (
+	id INT AUTO_INCREMENT NOT NULL,
+    user_id INT NOT NULL,
+    amount NUMERIC(18,2) DEFAULT 100 NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE user_inventory (
+	id INT AUTO_INCREMENT NOT NULL,
+    user_id INT NOT NULL,
+    part_id INT NOT NULL,
+    quantity INT DEFAULT 0 NOT NULL,
+    used INT DEFAULT 0 NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY(part_id) REFERENCES robot_parts(id) ON DELETE CASCADE
+);
+
+CREATE TABLE robots (
+	id INT AUTO_INCREMENT NOT NULL,
+    user_id INT NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    body INT NULL,
+    weapon INT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (body) REFERENCES robot_parts(id) ON DELETE CASCADE,
+    FOREIGN KEY (weapon) REFERENCES robot_parts(id) ON DELETE CASCADE
+);
+
+CREATE TABLE user_robots (
+	id INT AUTO_INCREMENT NOT NULL,
+    user_id INT NOT NULL,
+    robot_id INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (robot_id) REFERENCES robots(id) ON DELETE CASCADE
+);
