@@ -16,15 +16,23 @@ router.post('/users', (req, res) => {
     if (user.action === 'login') {
         User.login({username: user.username, password: user.password},
             //redirect to robot bay
-            (results) => res.json(results),
+            (results) => {
+                let redirect = {
+                    redirect: true,
+                    url: '/users/' + results[0].id
+                }
+                //res.setHeader("Content-Type", "text/html");
+                res.send(redirect);
+            },
             () => {
-            let error = {
-                error: true,
-                message: 'Invalid username or password'
+                let error = {
+                    error: true,
+                    message: 'Invalid username or password'
+                }
+                res.json(error);
             }
-            res.json(error);
-        });
-    } else {
+        );
+    } else if (user.action === 'create-account') {
         User.createAccount({username: user.username, password: user.password},
             (results) => res.json(results),
             () => {
@@ -34,6 +42,9 @@ router.post('/users', (req, res) => {
                 }
                 res.json(error);
             });
+    } else {
+        res.status(500);
+        res.end();
     }
     
 });

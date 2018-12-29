@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col s8 offset-s2">
+
+    {{#each robots}}
+    <div class="card">
+      <div class="row">
+        <div class="col s8">
+          <h4>{{robot_name}}</h4>
+          <p>Attack rating: {{total_damage}}</p>
+          <p>Defense rating: {{total_armor}}</p>
+        </div>
+
+        <div class="col s4">
+          <div class="btn edit-robot" data-user-id="{{user_id}}" data-robot-id="{{robot_id}}">Configure</div>
+        </div>
+      </div>
+      
+    </div>
+    {{/each}}
+
+    <div class="row center-align">
+      <div class="btn">Create New Robot</div>
+    </div>
+    
+  </div>
+</div>
+
+<script src="/assets/scripts/robots.js"></script>

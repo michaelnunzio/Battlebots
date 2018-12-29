@@ -22,9 +22,8 @@ $('document').ready(() => {
             if(data.error) {
                 $('#password-validation').removeClass('hidden');
                 $('#password-validation').text(data.message);
-            } else {
-                $('#password-validation').removeClass('hidden');
-                $('#password-validation').text(data[0].username + ' logged in!');
+            } else if (data.redirect){
+                window.location.href = data.url;
             }
         });
     });
