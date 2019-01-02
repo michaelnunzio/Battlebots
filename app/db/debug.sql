@@ -19,7 +19,9 @@ ON P.id = I.part_id;
 -- Robot Query
 SELECT U.id AS user_id,
 U.username,
+R.id AS robot_id,
 R.name,
+PP.position_id,
 PP.description,
 P.name,
 P.damage,
