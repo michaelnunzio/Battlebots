@@ -5,6 +5,23 @@ function getUserRobotsStats(userId, callback) {
     orm.selectFromWhere('vw_user_robot_stats', where, callback);
 }
 
+function getUserRobotConfiguration(userId, robotId, callback) {
+    let where = {
+        user_id: userId,
+        robot_id: robotId
+    };
+
+    orm.selectFromWhere('vw_user_robot_configuration', where, callback);
+}
+
+function getRobotName(robotId, callback) {
+    let where = {id: robotId};
+
+    orm.selectFromWhere('robots', where, callback);
+}
+
 module.exports = {
-    getUserRobotsStats: getUserRobotsStats
+    getRobotName: getRobotName,
+    getUserRobotsStats: getUserRobotsStats,
+    getUserRobotConfiguration: getUserRobotConfiguration
 };

@@ -18,9 +18,31 @@ router.get('/:id', (req, res) => {
 router.get('/:userid/:robotid', (req, res) => {
     let userId = req.params.userid;
     let robotId = req.params.robotid;
-    console.log(userId, robotId);
 
-    res.end();
+    let response = {user_id: userId};
+
+    async.parallel({
+        robotName: function(callback) {
+            Robot.getRobotName(robotId, (results) => {
+                response.robot_name = results[0].name;
+                callback(null, results);
+            });
+        },
+        configuration: function(callback) {
+            Robot.getUserRobotConfiguration(userId, robotId, (results) => {
+                response.robot_parts = results;
+                callback(null, results);
+            });
+        }
+    }, 
+    (err, results) => {
+        if(err) throw err;
+
+        console.log(response);
+        res.render('robotbay', response);
+    });
+    
+    
 });
 
 module.exports = router;

@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/taesch124/Battlebots#readme",
   "dependencies": {
+    "async": "^2.6.1",
     "express": "^4.16.4",
     "express-handlebars": "^3.0.0",
     "mysql": "^2.16.0"

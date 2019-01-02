@@ -1,11 +1,10 @@
 $('document').ready(() => {
 
-    $('.edit-robot').on('click', function() {
+    $('.to-robots').on('click', function() {
         let userId = $(this).data('user-id');
-        let robotId = $(this).data('robot-id');
-        console.log(userId, robotId);
+        console.log(userId);
 
-        window.location.href = '/users/' + userId + '/' + robotId;
+        window.location.href = '/users/' + userId;
 
         // $.get('/users/' + userId + '/' + robotId, function(data) {
         //     console.log(data);
