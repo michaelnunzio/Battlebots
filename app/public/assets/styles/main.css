@@ -31,6 +31,10 @@ p {
 .card {
     width: 550px;
     background: url("https://imgc.artprintimages.com/img/print/peeling-and-flaking-paint-on-a-rusted-steel-surface_u-l-q10x7oj0.jpg?h=550&w=550") no-repeat;
+    opacity: .9;
+}
+.card:hover {
+    opacity: 1;
 }
 .to-robots {
     color: black;
