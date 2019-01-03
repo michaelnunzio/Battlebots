@@ -1,5 +1,9 @@
 $('document').ready(() => {
 
+    $(document).ready(function(){
+        $('.parallax').parallax();
+      });
+            
     $('#login-button').on('click', function() {
         let username = $('#username').val().trim();
         let password = $('#password').val().trim();
