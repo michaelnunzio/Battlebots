@@ -3,6 +3,7 @@ const async = require('async');
 const fs = require('fs');
 const path = require('path');
 const Robot = require('./../models/robot');
+const User = require('./../models/user');
 
 const router = express.Router();
 
@@ -42,7 +43,15 @@ router.get('/:userid/:robotid', (req, res) => {
         res.render('robotbay', response);
     });
     
-    
+});
+
+router.get('/inventory/:userid', (req, res) => {
+    let userId = req.params.userid;
+
+    User.getUserInventory(userId, (results) => {
+        console.log(results);
+        res.end();
+    });
 });
 
 module.exports = router;

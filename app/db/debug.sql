@@ -38,3 +38,9 @@ ON RP.part_id = P.id;
 
 -- Robot Stats Query
  SELECT * FROM vw_user_robot_stats;
+ 
+ -- Robot Configuration Query
+ SELECT * FROM vw_user_robot_configuration;
+ 
+ -- User Inventory Query
+ SELECT * FROM vw_user_inventory;

@@ -1,5 +1,12 @@
 const connection = require('./connection');
 
+function selectFrom(table, callback) {
+    connection.query(queryString, table, function(err, results) {
+        if (err) throw err;
+        if(typeof callback === 'function') callback(results);
+      });
+}
+
 function selectFromWhereCol(table, col, where, callback) {
     let queryString = "SELECT * FROM ?? WHERE ?? = ?;";
 
@@ -66,6 +73,7 @@ function objToWhere(obj) {
 }
 
 module.exports = {
+    selectFrom: selectFrom,
     selectFromWhere: selectFromWhere,
     selectFromWhereCol: selectFromWhereCol,
     insertObject: insertObject,
