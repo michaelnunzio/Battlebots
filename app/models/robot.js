@@ -20,8 +20,15 @@ function getRobotName(robotId, callback) {
     orm.selectFromWhere('robots', where, callback);
 }
 
+function updateRobotPart(robotId, partId, positionId, callback) {
+    let update = {part_id: partId};
+    let where = {robot_id: robotId, position_id: positionId};
+    orm.updateTable('user_robot_parts', update, where, callback);
+}
+
 module.exports = {
     getRobotName: getRobotName,
     getUserRobotsStats: getUserRobotsStats,
-    getUserRobotConfiguration: getUserRobotConfiguration
+    getUserRobotConfiguration: getUserRobotConfiguration,
+    updateRobotPart: updateRobotPart
 };

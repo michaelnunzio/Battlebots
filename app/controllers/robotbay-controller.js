@@ -11,12 +11,11 @@ router.get('/:id', (req, res) => {
     let userId = req.params.id;
     console.log(userId);
     Robot.getUserRobotsStats(userId, (results) => {
-        console.log(results);
         res.render('robots', {robots: results});
     });
 });
 
-router.get('/:userid/:robotid', (req, res) => {
+router.get('/configuration/:userid/:robotid', (req, res) => {
     let userId = req.params.userid;
     let robotId = req.params.robotid;
 
@@ -39,7 +38,6 @@ router.get('/:userid/:robotid', (req, res) => {
     (err, results) => {
         if(err) throw err;
 
-        console.log(response);
         res.render('robotbay', response);
     });
     
@@ -47,11 +45,28 @@ router.get('/:userid/:robotid', (req, res) => {
 
 router.get('/inventory/:userid', (req, res) => {
     let userId = req.params.userid;
-
+    let robotId = req.query.robotId;
+    let positionId = req.query.positionId;
     User.getUserInventory(userId, (results) => {
-        console.log(results);
-        res.end();
+        results.map(e => {
+            e['robot_id'] = robotId;
+            e['position_id'] = positionId;
+        });
+
+        res.render('replace-part', {layout: false, available_parts: results});
     });
+});
+
+router.put('/robot/:robotid', (req, res) => {
+    let robotId = req.params.robotid;
+    let partId = req.body.partId;
+    let positionId = req.body.positionId;
+    console.log(robotId, partId, positionId);
+    Robot.updateRobotPart(robotId, partId, positionId, (results) => {
+        console.log(results);
+        
+    })
+    res.end();
 });
 
 module.exports = router;

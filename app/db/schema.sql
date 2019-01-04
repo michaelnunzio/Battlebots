@@ -118,6 +118,7 @@ ON RP.part_id = P.id;
 -- User Inventory View
 CREATE VIEW vw_user_inventory AS
 SELECT I.user_id,
+RP.id AS part_id,
 RP.name,
 RP.damage,
 RP.armor,
