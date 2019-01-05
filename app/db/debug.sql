@@ -1,3 +1,7 @@
+USE battlebots_db;
+
+SELECT * FROM user_robot_parts;
+
 -- Wallet Query
 SELECT U.username,
 W.amount

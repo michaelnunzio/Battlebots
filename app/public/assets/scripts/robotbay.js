@@ -12,7 +12,7 @@ $('document').ready(() => {
         // });
     });
 
-    $('.replace-part').on('click', function() {
+    $('.replace-part-prompt').on('click', function() {
         let userId = $(this).data('user-id');
         let robotId = $(this).data('robot-id');
         let positionId = $(this).data('part-position');
@@ -23,7 +23,8 @@ $('document').ready(() => {
         }).then(data => {
             $('.modal-content').html(data);
             $('#replace-part-modal').modal('open');
-            $('.pick-part').on('click', updateRobotPart);
+            $('.replace-part').on('click', updateRobotPart);
+            $('.add-part').on('click', addRobotPart);
         });
     });
 
@@ -42,8 +43,30 @@ function updateRobotPart() {
 
     console.log(robotId, partId, positionId, 'Create put request');
     $.ajax({
-        url: '/users/robot/' + robotId + '?partId=' + partId + '&positionId=' + positionId,
+        url: '/users/robot/' + robotId,
         type: 'PUT',
+        data: data
+    }).then(data => {
+        console.log(data);
+        window.location.reload();
+    });
+}
+
+function addRobotPart() {
+    let partId = $(this).data('part-id');
+    let robotId = $(this).data('robot-id');
+    let userId = $(this).data('user-id');
+    let positionId = $(this).data('position-id');
+    let data = {
+        userId: userId,
+        partId: partId,
+        positionId: positionId
+    };
+
+    console.log(robotId, partId, positionId, 'Create post request');
+    $.ajax({
+        url: '/users/robot/' + robotId,
+        type: 'POST',
         data: data
     }).then(data => {
         console.log(data);

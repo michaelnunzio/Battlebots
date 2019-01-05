@@ -122,8 +122,13 @@ RP.id AS part_id,
 RP.name,
 RP.damage,
 RP.armor,
-I.quantity - I.used AS available 
+I.quantity - COALESCE(UP.part_used,0) AS available 
 FROM user_inventory I 
 INNER JOIN available_robot_parts RP
 ON I.part_id = RP.id
-WHERE (I.quantity - I.used) > 0;
+LEFT JOIN (SELECT user_id, part_id, COUNT(part_id) AS part_used
+	FROM user_robot_parts
+    GROUP BY user_id, part_id) UP
+ON I.part_id = UP.part_id
+AND I.user_id = UP.user_id
+WHERE (I.quantity - COALESCE(UP.part_used, 0)) > 0;
