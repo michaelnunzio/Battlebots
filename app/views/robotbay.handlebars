@@ -1,6 +1,15 @@
 <div class="row">
   <div class="col s8 offset-s2">
 
+  <!-- Modal Structure -->
+  <div id="replace-part-modal" class="modal">
+    <div class="modal-content">
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
+    </div>
+  </div>
+
     <div class="row center-align">
       <h3>{{robot_name}}</h3>
     </div>
@@ -17,7 +26,7 @@
         </div>
 
         <div class="col s4">
-          <div class="btn replace-part" data-user-id="{{user_id}}" data-robot-id="{{robot_id}}" data-part-position="{{position_id}}">Replace</div>
+          <div class="btn waves-effect waves-light modal-trigger replace-part-prompt" data-user-id="{{user_id}}" data-robot-id="{{robot_id}}" data-part-position="{{position_id}}">Pick New Part</div>
         </div>
       </div>
       

@@ -1,3 +1,7 @@
+USE battlebots_db;
+
+SELECT * FROM user_robot_parts;
+
 -- Wallet Query
 SELECT U.username,
 W.amount
@@ -38,3 +42,9 @@ ON RP.part_id = P.id;
 
 -- Robot Stats Query
  SELECT * FROM vw_user_robot_stats;
+ 
+ -- Robot Configuration Query
+ SELECT * FROM vw_user_robot_configuration;
+ 
+ -- User Inventory Query
+ SELECT * FROM vw_user_inventory;

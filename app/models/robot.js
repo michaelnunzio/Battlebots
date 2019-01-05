@@ -28,10 +28,33 @@ function newRoboto(userID, name, callback){
 
     };
 
+function checkRobotPart(robotId, positionId, callback) {
+    let where = {robot_id: robotId, position_id: positionId};
+    orm.selectFromWhere('user_robot_parts', where, callback);
+}
+
+function updateRobotPart(robotId, partId, positionId, callback) {
+    let update = {part_id: partId};
+    let where = {robot_id: robotId, position_id: positionId};
+    orm.updateTable('user_robot_parts', update, where, callback);
+}
+
+function addRobotPart(userId, robotId, partId, positionId, callback) {
+    let insert = {
+        user_id: userId,
+        robot_id: robotId,
+        part_id: partId,
+        position_id: positionId
+    };
+    orm.insertObject('user_robot_parts', insert, callback);
+}
 
 module.exports = {
     getRobotName: getRobotName,
     getUserRobotsStats: getUserRobotsStats,
     getUserRobotConfiguration: getUserRobotConfiguration,
-    newRoboto: newRoboto
+    newRoboto: newRoboto,
+    checkRobotPart: checkRobotPart,
+    addRobotPart: addRobotPart,
+    updateRobotPart: updateRobotPart
 };

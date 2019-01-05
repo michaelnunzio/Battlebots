@@ -76,8 +76,8 @@ SELECT U.id AS user_id,
 U.username,
 R.id AS robot_id,
 R.name,
-SUM(P.damage) AS total_damage,
-SUM(P.armor) AS total_armor
+COALESCE(SUM(P.damage), 0) AS total_damage,
+COALESCE(SUM(P.armor), 0) AS total_armor
 FROM users U
 INNER JOIN robots R
 ON U.id = R.user_id
@@ -91,21 +91,44 @@ GROUP BY U.id, U.username, R.id, R.name;
 
 -- Robot configuration view
 CREATE VIEW vw_user_robot_configuration AS
-SELECT U.id AS user_id,
-U.username,
-R.id AS robot_id,
-R.name AS robot_name,
+SELECT A.user_id,
+A.username,
+A.robot_id,
+A.robot_name,
 PP.position_id,
 PP.description,
-P.name AS part_name,
-P.damage,
-P.armor
-FROM users U
-INNER JOIN robots R
-ON U.id = R.user_id
-INNER JOIN user_robot_parts RP
-ON R.id = RP.robot_id
-INNER JOIN robot_part_positions PP
-ON RP.position_id = PP.position_id
-INNER JOIN available_robot_parts P
+COALESCE(P.name, 'Empty') AS part_name,
+COALESCE(P.damage, 0) AS damage,
+COALESCE(P.armor, 0) AS armor
+FROM robot_part_positions PP
+CROSS JOIN
+	(SELECT U.id AS user_id,
+	U.username,
+	R.id AS robot_id,
+	R.name AS robot_name
+	FROM users U
+	INNER JOIN robots R
+	ON U.id = R.user_id) A
+LEFT JOIN user_robot_parts RP
+ON A.robot_id = RP.robot_id
+AND RP.position_id = PP.position_id
+LEFT JOIN available_robot_parts P
 ON RP.part_id = P.id;
+
+-- User Inventory View
+CREATE VIEW vw_user_inventory AS
+SELECT I.user_id,
+RP.id AS part_id,
+RP.name,
+RP.damage,
+RP.armor,
+I.quantity - COALESCE(UP.part_used,0) AS available 
+FROM user_inventory I 
+INNER JOIN available_robot_parts RP
+ON I.part_id = RP.id
+LEFT JOIN (SELECT user_id, part_id, COUNT(part_id) AS part_used
+	FROM user_robot_parts
+    GROUP BY user_id, part_id) UP
+ON I.part_id = UP.part_id
+AND I.user_id = UP.user_id
+WHERE (I.quantity - COALESCE(UP.part_used, 0)) > 0;
