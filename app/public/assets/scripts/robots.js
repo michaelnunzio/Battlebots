@@ -12,4 +12,12 @@ $('document').ready(() => {
         // });
     });
 
+    $(".create-bot").on('click', function(){
+        console.log("working")
+        let userId = $(this).data('user-id');
+        window.location.href = '/users/createBot/' + userId
+   
+
+    });
+
 });

@@ -20,6 +20,14 @@ function getRobotName(robotId, callback) {
     orm.selectFromWhere('robots', where, callback);
 }
 
+function newRoboto(userID, name, callback){
+
+   let where= {user_id: userID, name: name}
+
+    orm.insertObject('robots', where, callback)
+
+    };
+
 function checkRobotPart(robotId, positionId, callback) {
     let where = {robot_id: robotId, position_id: positionId};
     orm.selectFromWhere('user_robot_parts', where, callback);
@@ -45,6 +53,7 @@ module.exports = {
     getRobotName: getRobotName,
     getUserRobotsStats: getUserRobotsStats,
     getUserRobotConfiguration: getUserRobotConfiguration,
+    newRoboto: newRoboto,
     checkRobotPart: checkRobotPart,
     addRobotPart: addRobotPart,
     updateRobotPart: updateRobotPart
