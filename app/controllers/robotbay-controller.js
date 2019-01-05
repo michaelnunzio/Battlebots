@@ -102,9 +102,9 @@ router.post('/robot/:robotid', (req, res) => {
     let positionId = req.body.positionId;
     Robot.addRobotPart(userId, robotId, partId, positionId, (results) => {
         console.log(results);
-        
+        res.end();
     })
-    res.end();
+    
 });
 
 module.exports = router;
