@@ -5,7 +5,7 @@ $('document').ready(() => {
         let robotId = $(this).data('robot-id');
         console.log(userId, robotId);
 
-        window.location.href = '/users/' + userId + '/' + robotId;
+        window.location.href = '/users/configuration/' + userId + '/' + robotId;
 
         // $.get('/users/' + userId + '/' + robotId, function(data) {
         //     console.log(data);
