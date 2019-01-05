@@ -87,11 +87,7 @@ LEFT JOIN robot_part_positions PP
 ON RP.position_id = PP.position_id
 LEFT JOIN available_robot_parts P
 ON RP.part_id = P.id
-<<<<<<< HEAD
-GROUP BY U.id, U.username, R.name, R.id;
-=======
 GROUP BY U.id, U.username, R.id, R.name;
->>>>>>> ecc17773037b1829212ce05c4881f20d9ecbe42b
 
 -- Robot configuration view
 CREATE VIEW vw_user_robot_configuration AS
