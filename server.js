@@ -23,6 +23,13 @@ app.set('views', path.join(__dirname, 'app', 'views'));
 app.use('/', userController);
 app.use('/users', robotBayController);
 
+//** works when it's here */ 
+
+// app.get('/createBot', function(req, res) {
+//     res.render('createBot');
+// });
+//****** */
+
 app.listen(PORT, () => {
     console.log('Server listening on: http://localhost:' + PORT);
 });

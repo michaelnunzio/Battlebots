@@ -70,13 +70,36 @@ CREATE TABLE user_robot_parts (
     FOREIGN KEY (part_id) REFERENCES available_robot_parts(id) ON DELETE CASCADE
 );
 
--- Robot Stats Query
+-- Robot Stats View
 CREATE VIEW vw_user_robot_stats AS
 SELECT U.id AS user_id,
 U.username,
+R.id AS robot_id,
 R.name,
 SUM(P.damage) AS total_damage,
 SUM(P.armor) AS total_armor
+FROM users U
+INNER JOIN robots R
+ON U.id = R.user_id
+LEFT JOIN user_robot_parts RP
+ON R.id = RP.robot_id
+LEFT JOIN robot_part_positions PP
+ON RP.position_id = PP.position_id
+LEFT JOIN available_robot_parts P
+ON RP.part_id = P.id
+GROUP BY U.id, U.username, R.id, R.name;
+
+-- Robot configuration view
+CREATE VIEW vw_user_robot_configuration AS
+SELECT U.id AS user_id,
+U.username,
+R.id AS robot_id,
+R.name AS robot_name,
+PP.position_id,
+PP.description,
+P.name AS part_name,
+P.damage,
+P.armor
 FROM users U
 INNER JOIN robots R
 ON U.id = R.user_id
@@ -85,5 +108,4 @@ ON R.id = RP.robot_id
 INNER JOIN robot_part_positions PP
 ON RP.position_id = PP.position_id
 INNER JOIN available_robot_parts P
-ON RP.part_id = P.id
-GROUP BY U.id, U.username, R.name;
+ON RP.part_id = P.id;
