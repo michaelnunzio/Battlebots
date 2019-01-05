@@ -1,5 +1,12 @@
 const connection = require('./connection');
 
+function selectFrom(table, callback) {
+    connection.query(queryString, table, function(err, results) {
+        if (err) throw err;
+        if(typeof callback === 'function') callback(results);
+      });
+}
+
 function selectFromWhereCol(table, col, where, callback) {
     let queryString = "SELECT * FROM ?? WHERE ?? = ?;";
 
@@ -31,14 +38,16 @@ function insertObject(table, insert, callback) {
     });
 }
 
-function updateTable(table, update, where, callback) {
-    let queryString = 'UPDATE ?? SET ? WHERE ?';
+function updateTable(table, update, obj, callback) {    
+    let where = objToWhere(obj);
+    let queryString = 'UPDATE ?? SET ? WHERE ' + where + ';';
 
-    connection.query(queryString, [table, update, where], (err, results) => {
+    let sql = connection.query(queryString, [table, update, where], (err, results) => {
         if(err) throw err;
 
         if(typeof callback === 'function') callback(results);
     });
+    console.log(sql.query);
 }
 
 function deleteFromWhere(table, where, callback) {
@@ -56,9 +65,9 @@ function objToWhere(obj) {
     let counter = 0;
     for(let key in obj) {
         if(counter < keyCount - 1) {
-            result += `${key} =\'${obj[key]}\' AND `;
+            result += `${key} = \'${obj[key]}\' AND `;
         } else {
-            result += `${key}=\'${obj[key]}\'`
+            result += `${key} = \'${obj[key]}\'`
         }
         counter++;
     }
@@ -66,6 +75,7 @@ function objToWhere(obj) {
 }
 
 module.exports = {
+    selectFrom: selectFrom,
     selectFromWhere: selectFromWhere,
     selectFromWhereCol: selectFromWhereCol,
     insertObject: insertObject,

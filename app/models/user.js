@@ -25,8 +25,17 @@ function createAccount(user, success, failure) {
     
 }
 
+function getUserInventory(userId, callback) {
+    let where = {
+        user_id: userId
+    };
+
+    orm.selectFromWhere('vw_user_inventory', where,  callback);
+}
+
 module.exports = {
     checkUsernameExists: checkUsernameExists,
     login: login,
-    createAccount: createAccount
+    createAccount: createAccount,
+    getUserInventory: getUserInventory
 }
