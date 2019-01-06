@@ -1,6 +1,7 @@
 const connection = require('./connection');
 
 function selectFrom(table, callback) {
+    let queryString = 'SELECT * FROM ??';
     connection.query(queryString, table, function(err, results) {
         if (err) throw err;
         if(typeof callback === 'function') callback(results);
@@ -50,8 +51,9 @@ function updateTable(table, update, obj, callback) {
     console.log(sql.query);
 }
 
-function deleteFromWhere(table, where, callback) {
-    let queryString = 'DELETE FROM ?? WHERE ?';
+function deleteFromWhere(table, obj, callback) {
+    let where = objToWhere(obj);
+    let queryString = 'DELETE FROM ?? WHERE ' + where + ';';
 
     connection.query(queryString, [table, where], (err, results) => {
         if (err) throw err;

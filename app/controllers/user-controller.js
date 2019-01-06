@@ -33,8 +33,16 @@ router.post('/users', (req, res) => {
             }
         );
     } else if (user.action === 'create-account') {
+        let response = {};
         User.createAccount({username: user.username, password: user.password},
-            (results) => res.json(results),
+            (results) => {
+                response.account = results;
+                User.createWallet(results.insertId, (walletResults) => {
+                    response.wallet = walletResults;
+                    res.json(response);
+                });
+                
+            },
             () => {
                 let error = {
                     error: true,

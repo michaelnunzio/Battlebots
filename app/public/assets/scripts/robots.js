@@ -13,11 +13,16 @@ $('document').ready(() => {
     });
 
     $(".create-bot").on('click', function(){
-        console.log("working")
         let userId = $(this).data('user-id');
+        console.log(userId);
         window.location.href = '/users/createBot/' + userId
-   
+    });
 
+    $('.to-store').on('click', function() {
+        let userId = $(this).data('user-id');
+        console.log(userId);
+        
+        window.location.href = '/store/' + userId;
     });
 
 });

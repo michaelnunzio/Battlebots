@@ -2,12 +2,12 @@ h1 {
     font-weight: bold;
 }
 
-h1, h2, h3,  h6 {
+h1, h2, h3, h5, h6 {
     font-weight: bold;
     color: rgb(197, 197, 148);
     background: #b7410e15;
 }
-h4, h5{
+h4{
     font-weight: bold;
     color: #1d1d1c;
     background: #b7410e15;
@@ -95,3 +95,11 @@ p {
 }
 
 /* dual color botton change ending */
+
+table {
+    background-color: lightgrey;
+}
+
+th, td {
+    color: yellow;
+}
