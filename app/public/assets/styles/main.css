@@ -5,12 +5,10 @@ h1 {
 h1, h2, h3,  h6 {
     font-weight: bold;
     color: rgb(197, 197, 148);
-    background: #b7410e15;
 }
 h4, h5{
     font-weight: bold;
     color: #1d1d1c;
-    background: #b7410e15;
 }
 #create-account {
     margin-left: 1rem;
@@ -23,15 +21,19 @@ h4, h5{
 }
 p {
     font-weight: bold;
-    background: #b7410e15;
+
 }
 .hidden {
     display: none;
 }
 .card {
     width: 550px;
-    background: url("https://imgc.artprintimages.com/img/print/peeling-and-flaking-paint-on-a-rusted-steel-surface_u-l-q10x7oj0.jpg?h=550&w=550") no-repeat;
+    background-image: linear-gradient(to bottom right, red, yellow);
     opacity: .9;
+    transition: 0.2s ease-in-out;
+}
+.btn{
+    background-color:   #b7410e;
 }
 .card:hover {
     opacity: 1;
@@ -48,6 +50,7 @@ p {
 
 .dualcolorbutton{
     border: 1px solid;
+ transition: 0.2s ease-in-out;
  background: #b7410e; /* default button background color */
  display: inline-block; /* set to block or inline-block */
  padding: 10px 15px;
@@ -95,3 +98,12 @@ p {
 }
 
 /* dual color botton change ending */
+
+/* modal content css */
+
+.modalGradientBackground {
+    background-image: linear-gradient(to bottom right, red, yellow);
+}
+.modalGradientFooter {
+    background-image: linear-gradient(yellow, red);
+}
