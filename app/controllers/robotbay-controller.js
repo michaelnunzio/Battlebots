@@ -11,7 +11,8 @@ router.get('/:id', (req, res) => {
     let userId = req.params.id;
     console.log(userId);
     Robot.getUserRobotsStats(userId, (results) => {
-        res.render('robots', {robots: results});
+        console.log(results);
+        res.render('robots', {user_id: userId, robots: results});
     });
 });
 
@@ -106,5 +107,30 @@ router.post('/robot/:robotid', (req, res) => {
     })
     res.end();
 });
+
+//**for create new robot */
+
+router.get('/createBot/:userid', function(req, res) {
+    let userId = req.params.userid;
+    let response = {user_id: userId};
+
+        console.log(response)
+        res.render('createBot', response);
+});
+
+//****POST****/
+//**unncomment out below */
+
+router.post('/createBot/:userid',(req, res) =>{
+    let name= req.body.name;
+    let userID = req.params.userid;
+    let response = {user_id: userID, name: name};
+    console.log(response)
+
+    Robot.newRoboto(userID, name, (results)=>{
+        console.log(results)
+            res.end()
+    })
+})
 
 module.exports = router;
