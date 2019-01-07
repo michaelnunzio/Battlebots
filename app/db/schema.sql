@@ -32,7 +32,7 @@ CREATE TABLE robot_part_positions (
 
 CREATE TABLE user_wallets (
 	id INT AUTO_INCREMENT NOT NULL,
-    user_id INT NOT NULL,
+    user_id INT UNIQUE NOT NULL,
     amount NUMERIC(18,2) DEFAULT 100 NOT NULL,
     PRIMARY KEY(id),
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE

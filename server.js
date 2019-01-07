@@ -4,6 +4,7 @@ const path = require('path');
 
 const userController = require('./app/controllers/user-controller');
 const robotBayController = require('./app/controllers/robotbay-controller');
+const storeController = require('./app/controllers/store-controller');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -23,6 +24,7 @@ app.set('views', path.join(__dirname, 'app', 'views'));
 
 app.use('/', userController);
 app.use('/users', robotBayController);
+app.use('/store', storeController);
 
 //** works when it's here */ 
 
