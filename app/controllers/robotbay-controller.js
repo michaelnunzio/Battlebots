@@ -38,7 +38,7 @@ router.get('/configuration/:userid/:robotid', (req, res) => {
     }, 
     (err, results) => {
         if(err) throw err;
-
+        console.log(response);
         res.render('robotbay', response);
     });
     
@@ -80,9 +80,6 @@ router.get('/inventory/:userid', (req, res) => {
         res.render('replace-part', {layout: false, response: response});
     });
 
-    
-
-
 });
 
 router.put('/robot/:robotid', (req, res) => {
@@ -91,9 +88,9 @@ router.put('/robot/:robotid', (req, res) => {
     let positionId = req.body.positionId;
     Robot.updateRobotPart(robotId, partId, positionId, (results) => {
         console.log(results);
-        
-    })
-    res.end();
+        res.end();
+    });
+    
 });
 
 router.post('/robot/:robotid', (req, res) => {
@@ -104,7 +101,22 @@ router.post('/robot/:robotid', (req, res) => {
     Robot.addRobotPart(userId, robotId, partId, positionId, (results) => {
         console.log(results);
         res.end();
+<<<<<<< HEAD
     })
+=======
+    });
+});
+
+router.delete('/robot/:robotid', (req, res) => {
+    let robotId = req.params.robotid;
+    let positionId = req.body.position_id;
+
+    console.log(robotId, positionId);
+    Robot.removeRobotPart(robotId, positionId, (results) => {
+        console.log(results);
+        res.end();
+    });
+>>>>>>> bade43a525e6523c0e7aa93d236c4589337135c7
     
 });
 
@@ -114,8 +126,8 @@ router.get('/createBot/:userid', function(req, res) {
     let userId = req.params.userid;
     let response = {user_id: userId};
 
-        console.log(response)
-        res.render('createBot', response);
+    console.log(response)
+    res.render('createBot', response);
 });
 
 //****POST****/
@@ -129,7 +141,7 @@ router.post('/createBot/:userid',(req, res) =>{
 
     Robot.newRoboto(userID, name, (results)=>{
         console.log(results)
-            res.end()
+        res.end()
     })
 })
 
