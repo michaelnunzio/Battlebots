@@ -4,7 +4,14 @@ function getUserRobotsStats(userId, callback) {
     let where = {user_id: userId};
     orm.selectFromWhere('vw_user_robot_stats', where, callback);
 }
+//** */
 
+function getUserSingleRobotStats(userId, robotId, callback) {
+    let where = {user_id: userId, robot_id: robotId};
+    orm.selectFromWhere('vw_user_robot_stats', where, callback);
+}
+
+//** */
 function getUserRobotConfiguration(userId, robotId, callback) {
     let where = {
         user_id: userId,
@@ -51,6 +58,7 @@ function addRobotPart(userId, robotId, partId, positionId, callback) {
 
 module.exports = {
     getRobotName: getRobotName,
+    getUserSingleRobotStats: getUserSingleRobotStats,
     getUserRobotsStats: getUserRobotsStats,
     getUserRobotConfiguration: getUserRobotConfiguration,
     newRoboto: newRoboto,
