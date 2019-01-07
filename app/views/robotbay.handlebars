@@ -26,7 +26,10 @@
         </div>
 
         <div class="col s4">
-          <div class="btn dualcolorbutton waves-effect waves-light modal-trigger replace-part-prompt" data-user-id="{{user_id}}" data-robot-id="{{robot_id}}" data-part-position="{{position_id}}">Pick New Part</div>
+          <div class="btn waves-effect waves-light modal-trigger replace-part-prompt" data-user-id="{{user_id}}" data-robot-id="{{robot_id}}" data-part-position="{{position_id}}">Pick New Part</div>
+          {{#if part_equipped}}
+          <div class="btn waves-effect waves-light remove-part" data-user-id="{{user_id}}" data-robot-id="{{robot_id}}" data-part-position="{{position_id}}">Remove Part</div>
+          {{/if}}
         </div>
       </div>
       
