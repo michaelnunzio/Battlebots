@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const Robot = require('./../models/robot');
 const User = require('./../models/user');
+const enemyBots= require('./../models/opponents') //delete later
 
 const router = express.Router();
 
@@ -147,5 +148,21 @@ router.post('/createBot/:userid',(req, res) =>{
         res.end()
     })
 })
+
+//**get for battlebot arena**//
+
+router.get('/arena/:userid/:robotid', (req, res) =>{
+    let userId = req.params.userid;
+    let robotId = req.params.robotid;
+    // let response = {user_id: userId, robot_id: robotId};
+
+    Robot.getUserSingleRobotStats(userId, robotId, results=>{
+        console.log(results[0])
+        res.render('arena', results[0]);
+
+    })
+
+
+});
 
 module.exports = router;
