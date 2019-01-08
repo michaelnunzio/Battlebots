@@ -9,9 +9,7 @@ const router = express.Router();
 
 router.get('/:id', (req, res) => {
     let userId = req.params.id;
-    console.log(userId);
     Robot.getUserRobotsStats(userId, (results) => {
-        console.log(results);
         res.render('robots', {user_id: userId, robots: results});
     });
 });
@@ -38,7 +36,6 @@ router.get('/configuration/:userid/:robotid', (req, res) => {
     }, 
     (err, results) => {
         if(err) throw err;
-        console.log(response);
         res.render('robotbay', response);
     });
     
@@ -76,7 +73,6 @@ router.get('/inventory/:userid', (req, res) => {
     },
     (err, results) => {
         if(err) throw err;
-        console.log(response);
         res.render('replace-part', {layout: false, response: response});
     });
 
@@ -87,7 +83,6 @@ router.put('/robot/:robotid', (req, res) => {
     let partId = req.body.partId;
     let positionId = req.body.positionId;
     Robot.updateRobotPart(robotId, partId, positionId, (results) => {
-        console.log(results);
         res.end();
     });
     
@@ -99,11 +94,7 @@ router.post('/robot/:robotid', (req, res) => {
     let partId = req.body.partId;
     let positionId = req.body.positionId;
     Robot.addRobotPart(userId, robotId, partId, positionId, (results) => {
-        console.log(results);
         res.end();
-<<<<<<< HEAD
-    })
-=======
     });
 });
 
@@ -113,10 +104,8 @@ router.delete('/robot/:robotid', (req, res) => {
 
     console.log(robotId, positionId);
     Robot.removeRobotPart(robotId, positionId, (results) => {
-        console.log(results);
         res.end();
     });
->>>>>>> bade43a525e6523c0e7aa93d236c4589337135c7
     
 });
 
@@ -126,7 +115,6 @@ router.get('/createBot/:userid', function(req, res) {
     let userId = req.params.userid;
     let response = {user_id: userId};
 
-    console.log(response)
     res.render('createBot', response);
 });
 
@@ -136,11 +124,8 @@ router.get('/createBot/:userid', function(req, res) {
 router.post('/createBot/:userid',(req, res) =>{
     let name= req.body.name;
     let userID = req.params.userid;
-    let response = {user_id: userID, name: name};
-    console.log(response)
 
     Robot.newRoboto(userID, name, (results)=>{
-        console.log(results)
         res.end()
     })
 })

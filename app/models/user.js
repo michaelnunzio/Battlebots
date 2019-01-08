@@ -65,7 +65,7 @@ function addNewPartToInventory(userId, partId, quantity, callback) {
 function createWallet(userId, callback) {
     let insert = {
         user_id: userId,
-        amount: 150
+        amount: 25
     };
 
     orm.insertObject('user_wallets', insert, callback);
