@@ -3,7 +3,6 @@ $(document).ready(function(){
 
     $('.to-robots').on('click', function() {
         let userId = $(this).data('user-id');
-        console.log(userId);
 
         window.location.href = '/users/' + userId;
     });
@@ -21,13 +20,11 @@ $(document).ready(function(){
             quantity: quantity
         };
 
-        console.log(userId, partId, quantity);
         $.ajax({
             url: '/store/' + userId,
             method: 'POST',
             data: data
         }).then(data => {
-            console.log(data);
             if(data.error) {
                 $('#wallet-validation').removeClass('hidden');
                 $('#wallet-validation').text(data.message);
