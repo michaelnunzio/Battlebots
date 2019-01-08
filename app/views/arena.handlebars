@@ -1,0 +1,64 @@
+<div class="container-fluid">
+
+      <!-- Modal Structure -->
+  <div id="arena-modal" class="modal">
+    <div id="modal-name"></div>
+        <div id="modal-stats"></div>
+        <div id="modal-battle-end"></div> <!-- You Win / Lose -->
+        <div id="money-gainz"></div>
+        <div id="modal-combat-log"></div> <!-- what you have vs them-->
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat to-robots" data-user-id="{{user_id}}">Return To Bay</a>
+    </div>
+  </div>
+
+    <div class="card grey">
+      <div class="row center-align">
+        <div class="col-s6">
+          <h3>BattleBots Arena!</h3>
+          <h4>Who Would You Like to Battle?</h4>
+    </div>
+        </div> 
+            </div>
+
+            <div class="card grey">
+             <div class="row center-align">
+                    <h4>robot name:{{name}}</h4>
+                <p>Attack rating: {{total_damage}}</p>
+                <p>Defense rating: {{total_armor}}</p>
+            </div>  
+            </div>
+ 
+
+            <div class="card grey">
+             <div class="row center-align">
+                 <h3>Enemy Robots</h3>
+                    <h4>Robot Name: Easy Bot</h4>
+                    <div class="btn dualcolorbutton easyBattle" data-attack-id="{{total_damage}}" 
+                    data-defense-id="{{total_armor}}" data-name-id="{{name}}"> BattleBot</div>
+            </div>  
+            </div>
+
+                  <div class="btn to-robots" data-user-id="{{user_id}}">Back</div>
+
+    </div>
+
+    <script src="/assets/scripts/arena.js"></script>
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>  <!--cont end-->
+
