@@ -65,7 +65,7 @@ function addNewPartToInventory(userId, partId, quantity, callback) {
 function createWallet(userId, callback) {
     let insert = {
         user_id: userId,
-        amount: 150
+        amount: 25
     };
 
     orm.insertObject('user_wallets', insert, callback);
@@ -97,6 +97,18 @@ function updateWallet(userId, amount, callback) {
     });
 }
 
+function getUserBattleResults(userId, callback) {
+    let where = {user_id: userId};
+    
+    orm.selectFromWhere('user_battle_results', where, callback);
+}
+
+function createUserBattleResults(userId, callback) {
+    let insert = {user_id: userId, wins: 0, losses: 0};
+
+    orm.insertObject('user_battle_results', insert, callback)
+}
+
 module.exports = {
     checkUsernameExists: checkUsernameExists,
     login: login,
@@ -107,5 +119,7 @@ module.exports = {
     updateInventoryPartQuantity: updateInventoryPartQuantity,
     createWallet: createWallet,
     getUserFunds: getUserFunds,
-    updateWallet: updateWallet
+    updateWallet: updateWallet,
+    getUserBattleResults: getUserBattleResults,
+    createUserBattleResults: createUserBattleResults
 }
