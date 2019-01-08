@@ -17,40 +17,33 @@
 <body class="backGroundImage">
     <div class="container">
         {{!-- using the transparent-card to manage opacity for general site use --}}
-        <div class="card transparent-card">
+        <div class="card transparent-card z-depth-0">
            {{!-- Using  title-card to manage the opacity of log in--}}
-           <div class="title-card">
+           <div class="title-card ">
                 <div class="row"> 
                       <div class="col s12">
-                        <h1 class="card-panel center-align yellow-text text-darken-1 battleBots" id="title" >Battlebots</h1>
+                        <h1 class="card-panel center-align battleBots z-depth-0" id="title" >Battlebots</h1>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col s12">
+                    <div class="col s12 ">
                         {{{body}}}
                 
                 </div>
             </div>
         </div>
     </div>
-{{!-- this needs to get fixed --}}
-                <audio src="/music/BGMusic.mp3" controls>
-                <p>If you are reading this, it is because your browser does not support the audio element.</p>
-                </audio>
+              
                     </div>
 
    
 </body>
 {{!-- style for general background as well as making the card transparent --}}
 <style> 
-.backGroundImage{
-	background-image:url("https://bw-1651cf0d2f737d7adeab84d339dbabd3-gallery.s3.amazonaws.com/images/image_2827288/42a4466df10370b266e816dba59f2cee_original.jpg");
-    height: 100%;
-    width:100%;
-    background-repeat: round;
-}
+
 .transparent-card{
    background: rgba( 252,252,252,0);
+
 }
 #title{
   background: rgba( 252,252,252,0);

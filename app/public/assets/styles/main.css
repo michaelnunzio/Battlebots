@@ -14,7 +14,9 @@ h4{
     margin-left: 1rem;
     color: black;
 }
-
+.battleBots {
+    color: #b7410e
+}
 .validation-text {
     font-size: .8rem;
     color: red;
@@ -28,7 +30,7 @@ p {
 }
 .card {
     width: 550px;
-    background-image: linear-gradient(to bottom right, red, yellow);
+    background-image: linear-gradient(to bottom right, rgb(97, 93, 93), rgb(29, 29, 23));
     opacity: .9;
     transition: 0.2s ease-in-out;
 }
@@ -45,7 +47,9 @@ p {
 .to-robots:hover {
     background: #b7410e;
 }
-
+.btn:hover{
+    background: #b7410e;
+}
 /* dual color button change */
 
 .dualcolorbutton{
@@ -102,14 +106,34 @@ p {
 /* modal content css */
 
 .modalGradientBackground {
-    background-image: linear-gradient(to bottom right, red, yellow);
+    background-image: linear-gradient(to bottom right, rgb(97, 93, 93), rgb(29, 29, 23));
 }
 .modalGradientFooter {
-    background-image: linear-gradient(yellow, red);
-table {
-    background-color: lightgrey;
+    background-image: linear-gradient( rgb(97, 93, 93), rgb(29, 29, 23));
+}
+    table {
+    background-image: linear-gradient(to bottom right, rgb(97, 93, 93), rgb(29, 29, 23));
 }
 
 th, td {
-    color: yellow;
+    color: rgb(197, 197, 148);
+}
+/* login password field */
+#username {
+    background-color: #b7410e;
+    opacity: .4;
+}
+#password {
+    background-color: #b7410e;
+    opacity: .4;
+}
+/* initial Background Image */
+.backGroundImage{
+	background-image:url("https://i.pinimg.com/originals/2f/6b/32/2f6b32ea73be423a9ecb2acab6ca8a71.jpg");
+    height: 100%;
+    width:100%;
+    background-repeat: auto;
+    background-size: 100%;
+    background-position: top;
+    background-attachment: fixed;
 }
