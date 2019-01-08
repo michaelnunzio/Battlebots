@@ -9,9 +9,27 @@ const router = express.Router();
 
 router.get('/:id', (req, res) => {
     let userId = req.params.id;
-    Robot.getUserRobotsStats(userId, (results) => {
-        res.render('robots', {user_id: userId, robots: results});
+    let response = {user_id: userId};
+    async.parallel({
+        userScorecard: function(callback) {
+            User.getUserBattleResults(userId, (results) => {
+                response.battleResults = results[0];
+                callback(null, response);
+            })
+        },
+        robotStats: function(callback) {
+            Robot.getUserRobotsStats(userId, (results) => {
+                response.robots = results;
+                callback(null, response);
+            });
+        }
+    },
+    (err, results) => {
+        if(err) throw err;
+        console.log(response);
+        res.render('robots', response);
     });
+    
 });
 
 router.get('/configuration/:userid/:robotid', (req, res) => {
