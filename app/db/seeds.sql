@@ -7,6 +7,9 @@ INSERT INTO user_wallets (user_id, amount)
 VALUES (1, 150),
 (2, 0);
 
+INSERT INTO user_battle_results (user_id, wins, losses)
+VALUES (1,0,0);
+
 DELETE FROM robot_part_positions;
 INSERT INTO robot_part_positions (position_id, description)
 VALUES (1, 'Weapon 1 Slot'),

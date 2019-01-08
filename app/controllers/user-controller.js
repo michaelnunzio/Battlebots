@@ -1,7 +1,5 @@
 const express = require('express');
 const async = require('async');
-const fs = require('fs');
-const path = require('path');
 const User = require('../models/user');
 
 const router = express.Router();
@@ -34,22 +32,38 @@ router.post('/users', (req, res) => {
         );
     } else if (user.action === 'create-account') {
         let response = {};
-        User.createAccount({username: user.username, password: user.password},
-            (results) => {
-                response.account = results;
-                User.createWallet(results.insertId, (walletResults) => {
-                    response.wallet = walletResults;
-                    res.json(response);
-                });
-                
+        async.series([
+            function(callback) {
+                User.createAccount({username: user.username, password: user.password},
+                    (results) => {
+                        response.account = results;
+                        callback(null, response);
+                    },
+                    () => {
+                        let error = {
+                            error: true,
+                            message: 'Username already exists'
+                        }
+                        callback(error, response);
+                    });
             },
-            () => {
-                let error = {
-                    error: true,
-                    message: 'Username already exists'
-                }
-                res.json(error);
-            });
+            function(callback) {
+                User.createWallet(response.account.insertId, (walletResults) => {
+                    response.wallet = walletResults;
+                    callback(null, response);
+                });
+            },
+            function(callback) {
+                User.createUserBattleResults(response.account.insertId, (scorecardResults) => {
+                    response.scorecard = scorecardResults;
+                    callback(null, response);
+                });
+            }
+        ], function(err, response) {
+            if(err) res.send(err);
+            else res.send(response);
+        });
+        
     } else {
         res.status(500);
         res.end();
