@@ -10,30 +10,12 @@ $('document').ready(() => {
             let user = {name: name, attack: attack, defense: defense};
 
             let enemyName= "Easy Bot"
-            let enemyAtk= 40
-            let enemyDef= 9
+            let enemyAtk= 12
+            let enemyDef= 15
 
             let enemy = {name: enemyName, attack: enemyAtk, defense: enemyDef};
 
             fightBots(user, enemy);
-
-            // if(enemyTotal > UserTotal){
-            //     var loser = "You Lose!!"
-            //     console.log(loser)
-            //     $("#modal-battle-end").html(loser)
-            //     $("#money-gainz").html("You Lost.. You'll Get Em' Next Time. You Earned: ") //add money- put to database
-            // }else if(UserTotal > enemyTotal){
-            //     var winner = "You Won!!"
-            //     console.log(winner)
-            //     $("#modal-battle-end").html(winner)
-            //     $("#money-gainz").html("Victory! You Earned: ") //add money- put to database
-            // }
-            //****MODAL****//
-            
-            // Get the button that opens the modal
-            // When the user clicks on the button-->
-            
-            //****MODAL****//
 
     }); //easy end
 
