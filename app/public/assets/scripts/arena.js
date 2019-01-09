@@ -54,10 +54,9 @@ function fightBots(user, enemy) {
     $("#arena-modal").modal("open");
     console.log(user, enemy);
 
-
-        let botMatch = setInterval(() => {
-            playRound(user, enemy, botMatch);
-        }, 2400);
+    let botMatch = setInterval(() => {
+        playRound(user, enemy, botMatch);
+    }, 2400);
 
 }
 
@@ -65,7 +64,7 @@ function playRound(user, enemy, interval) {
     let damageMultiplier;
     let combatLog = $('#modal-combat-log');
 
-    damageMultiplier = Math.random().toFixed(2) * (.8 - .2) + .2;
+    damageMultiplier = Math.random() * (.8 - .2) + .2;
     let userAttack = user.attack * damageMultiplier;
     let userAttackMessage = $('<p>');
     userAttackMessage.text('User deals '+ userAttack.toFixed(2) + ' damage.');
@@ -82,7 +81,7 @@ function playRound(user, enemy, interval) {
         return;
     }
 
-    damageMultiplier = Math.random().toFixed(2) * (.8 - .2) + .2;
+    damageMultiplier = Math.random() * (.8 - .2) + .2;
     let enemyAttack = enemy.attack * damageMultiplier;
     let enemyAttackMessage = $('<p>');
     enemyAttackMessage.text('Enemy deals ' + enemyAttack.toFixed(2) + ' damage.');
