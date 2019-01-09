@@ -4,7 +4,7 @@ $('document').ready(() => {
     $('.easyBattle').on('click', function() {
 
             let name= $(this).data("name-id")
-            console.log(name)
+            // console.log(name)
             let attack= $(this).data("attack-id")
             console.log(attack)
             let defense= $(this).data("defense-id")
