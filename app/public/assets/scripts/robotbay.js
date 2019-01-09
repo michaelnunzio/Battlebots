@@ -3,13 +3,8 @@ $('document').ready(() => {
 
     $('.to-robots').on('click', function() {
         let userId = $(this).data('user-id');
-        console.log(userId);
 
         window.location.href = '/users/' + userId;
-
-        // $.get('/users/' + userId + '/' + robotId, function(data) {
-        //     console.log(data);
-        // });
     });
 
     $('.replace-part-prompt').on('click', function() {
@@ -28,7 +23,19 @@ $('document').ready(() => {
         });
     });
 
-    
+    $('.remove-part').on('click', function() {
+        let robotId = $(this).data('robot-id');
+        let positionId = $(this).data('part-position');
+        let data = {position_id: positionId};
+
+        $.ajax({
+            url: '/users/robot/' + robotId,
+            type: 'DELETE',
+            data: data
+        }).then(data => {
+            window.location.reload();
+        })
+    });
 
 });
 
@@ -41,13 +48,11 @@ function updateRobotPart() {
         positionId: positionId
     };
 
-    console.log(robotId, partId, positionId, 'Create put request');
     $.ajax({
         url: '/users/robot/' + robotId,
         type: 'PUT',
         data: data
     }).then(data => {
-        console.log(data);
         window.location.reload();
     });
 }
@@ -63,13 +68,11 @@ function addRobotPart() {
         positionId: positionId
     };
 
-    console.log(robotId, partId, positionId, 'Create post request');
     $.ajax({
         url: '/users/robot/' + robotId,
         type: 'POST',
         data: data
     }).then(data => {
-        console.log(data);
         window.location.reload();
     });
 }

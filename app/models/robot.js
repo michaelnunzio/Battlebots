@@ -4,14 +4,26 @@ function getUserRobotsStats(userId, callback) {
     let where = {user_id: userId};
     orm.selectFromWhere('vw_user_robot_stats', where, callback);
 }
+//** */
 
+function getUserSingleRobotStats(userId, robotId, callback) {
+    let where = {user_id: userId, robot_id: robotId};
+    orm.selectFromWhere('vw_user_robot_stats', where, callback);
+}
+
+//** */
 function getUserRobotConfiguration(userId, robotId, callback) {
     let where = {
         user_id: userId,
         robot_id: robotId
     };
 
-    orm.selectFromWhere('vw_user_robot_configuration', where, callback);
+    orm.selectFromWhere('vw_user_robot_configuration', where, (results) => {
+        results.forEach(e => {
+            e.part_name === 'Empty' ? e.part_equipped = false : e.part_equipped = true;
+        });
+        callback(results);
+    });
 }
 
 function getRobotName(robotId, callback) {
@@ -19,6 +31,14 @@ function getRobotName(robotId, callback) {
 
     orm.selectFromWhere('robots', where, callback);
 }
+
+function newRoboto(userID, name, callback){
+
+   let where= {user_id: userID, name: name}
+
+    orm.insertObject('robots', where, callback)
+
+    };
 
 function checkRobotPart(robotId, positionId, callback) {
     let where = {robot_id: robotId, position_id: positionId};
@@ -41,11 +61,22 @@ function addRobotPart(userId, robotId, partId, positionId, callback) {
     orm.insertObject('user_robot_parts', insert, callback);
 }
 
+function removeRobotPart(robotId, positionId, callback) {
+    let where = {
+        robot_id: robotId,
+        position_id: positionId
+    };
+    orm.deleteFromWhere('user_robot_parts', where, callback);
+}
+
 module.exports = {
     getRobotName: getRobotName,
+    getUserSingleRobotStats: getUserSingleRobotStats,
     getUserRobotsStats: getUserRobotsStats,
     getUserRobotConfiguration: getUserRobotConfiguration,
+    newRoboto: newRoboto,
     checkRobotPart: checkRobotPart,
     addRobotPart: addRobotPart,
-    updateRobotPart: updateRobotPart
+    updateRobotPart: updateRobotPart,
+    removeRobotPart: removeRobotPart
 };

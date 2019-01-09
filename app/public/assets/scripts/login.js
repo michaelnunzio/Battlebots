@@ -22,7 +22,6 @@ $('document').ready(() => {
             type: 'POST',
             data: user
         }).then(data => {
-            console.log(data);
             if(data.error) {
                 $('#password-validation').removeClass('hidden');
                 $('#password-validation').text(data.message);
@@ -50,13 +49,11 @@ $('document').ready(() => {
             type: 'POST',
             data: user
         }).then(data => {
-            console.log(data);
             if(data.error) {
                 $('#password-validation').removeClass('hidden');
                 $('#password-validation').text(data.message);
             }
             else {
-                console.log(data);
                 $('#password-validation').removeClass('hidden');
                 $('#password-validation').text('Account created!');
             }

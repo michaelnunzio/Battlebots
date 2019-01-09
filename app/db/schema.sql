@@ -7,10 +7,9 @@ CREATE TABLE users (
     username VARCHAR(30) NOT NULL,
     password VARCHAR(60) NOT NULL,
     email VARCHAR(80) NULL,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    INDEX(username)
 );
-
-CREATE INDEX ix_username ON users(username);
 
 CREATE TABLE available_robot_parts (
 	id INT AUTO_INCREMENT NOT NULL,
@@ -32,7 +31,7 @@ CREATE TABLE robot_part_positions (
 
 CREATE TABLE user_wallets (
 	id INT AUTO_INCREMENT NOT NULL,
-    user_id INT NOT NULL,
+    user_id INT UNIQUE NOT NULL,
     amount NUMERIC(18,2) DEFAULT 100 NOT NULL,
     PRIMARY KEY(id),
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
@@ -47,6 +46,15 @@ CREATE TABLE user_inventory (
     PRIMARY KEY(id),
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY(part_id) REFERENCES available_robot_parts(id) ON DELETE CASCADE
+);
+
+CREATE TABLE user_battle_results (
+	id INT AUTO_INCREMENT NOT NULL,
+    user_id INT NOT NULL,
+    wins INT DEFAULT 0 NOT NULL,
+    losses INT DEFAULT 0 NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE robots (
