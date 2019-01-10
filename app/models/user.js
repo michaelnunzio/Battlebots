@@ -109,6 +109,25 @@ function createUserBattleResults(userId, callback) {
     orm.insertObject('user_battle_results', insert, callback)
 }
 
+function updateBattleResults(userId, victory, callback) {
+    let where = {user_id: userId};
+    console.log('User won: ' + victory, typeof victory);
+
+    orm.selectFromWhere('user_battle_results', where, (results) => {
+        if(victory === 'true') {
+            let newWins = results[0].wins + 1;
+            let wins = {wins: newWins};
+            console.log('Updating wins to ' + newWins);
+            orm.updateTable('user_battle_results', wins, where, callback);
+        } else {
+            let newLosses = results[0].losses + 1;
+            let losses = {losses: newLosses};
+            console.log('Updating losses to ' + newLosses);
+            orm.updateTable('user_battle_results', losses, where, callback);
+        }
+    }); 
+}
+
 module.exports = {
     checkUsernameExists: checkUsernameExists,
     login: login,
@@ -121,5 +140,6 @@ module.exports = {
     getUserFunds: getUserFunds,
     updateWallet: updateWallet,
     getUserBattleResults: getUserBattleResults,
-    createUserBattleResults: createUserBattleResults
+    createUserBattleResults: createUserBattleResults,
+    updateBattleResults: updateBattleResults
 }
