@@ -66,7 +66,7 @@ function playRound(user, enemy, interval) {
 
     damageMultiplier = Math.random() * (.8 - .2) + .2;
     let enemyAttack = enemy.attack * damageMultiplier;
-    let enemyAttackMessage = $('<p>');
+    let enemyAttackMessage = $('<p class="wreckage">');
     enemyAttackMessage.text('Enemy deals ' + enemyAttack.toFixed(2) + ' damage.');
     combatLog.append(enemyAttackMessage);
 
