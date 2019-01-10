@@ -39,7 +39,9 @@
                 <p>Attack rating: {{total_damage}}</p>
                 <p>Defense rating: {{total_armor}}</p>
                     <div class="btn dualcolorbutton easyBattle" data-enemyAtk="{{total_damage}}" 
-                    data-enemyDef="{{total_armor}}" data-enemyName="{{name}}" data-userAtk="{{../userRobot.total_damage}}" data-userDef="{{../userRobot.total_armor}}"> BattleBot</div>
+                    data-enemyDef="{{total_armor}}" data-enemyName="{{name}}" 
+                    data-userAtk="{{../userRobot.total_damage}}" data-userDef="{{../userRobot.total_armor}}" 
+                    data-userID="{{../userRobot.user_id}}" data-userName="{{../userRobot.name}}"> BattleBot</div>
             </div>  
             </div>
                 {{/each}}

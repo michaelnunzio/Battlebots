@@ -2,6 +2,11 @@ h1 {
     font-weight: bold;
 }
 
+#title{
+    text-shadow: 8px 8px white;
+    /* color:black; */
+}
+
 h1, h2, h3, h5, h6 {
     font-weight: bold;
     color: rgb(197, 197, 148);
@@ -32,6 +37,12 @@ p {
     width: 550px;
     background: url("https://imgc.artprintimages.com/img/print/peeling-and-flaking-paint-on-a-rusted-steel-surface_u-l-q10x7oj0.jpg?h=550&w=550") no-repeat;
     opacity: .9;
+
+  
+        border-top-left-radius: 7px;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 6px;
+        border-bottom-left-radius: 8px;
 }
 .card:hover {
     opacity: 1;
