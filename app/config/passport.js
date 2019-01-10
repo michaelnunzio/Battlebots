@@ -8,21 +8,20 @@ module.exports = function(passport) {
   passport.use(
     new LocalStrategy((username, password, done) => {
       // Match user
-      User.findOne(['username',username],user => {
-        if (user.length === 0) {
-          return done(null, false, { message: 'That email is not registered' });
-        }
+      console.log('Authenticating ' + username + ' with password ' + password);
+      let user = {username: username, password: password};
 
-        // Match password
-        bcrypt.compare(password, user[0].password, (err, isMatch) => {
-          if (err) throw err;
-          if (isMatch) {
-            return done(null, user[0]);
-          } else {
-            return done(null, false, { message: 'Password incorrect' });
-          }
-        });
-      });
+      User.login(user, 
+        (results) => {
+          if (results.length === 1) {
+            console.log('Logging in..');
+            return done(null, results[0]);
+          } 
+        },
+        () => {
+          return done(null, false, {error: true, message: 'Password incorrect'});
+        }
+      );
     })
   );
 
@@ -30,9 +29,10 @@ module.exports = function(passport) {
     done(null, user);
   });
 
-  passport.deserializeUser(function(id, done) {
-    User.findOne(['id',id], function(user) {
-      done(null, user);
+  passport.deserializeUser(function(user, done) {
+    User.getUser(user.id, (results) => {
+      console.log(user.id, results);
+      done(null, results[0]);
     });
   });
 };
