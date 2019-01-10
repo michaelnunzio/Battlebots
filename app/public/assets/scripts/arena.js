@@ -22,9 +22,7 @@ $('document').ready(() => {
 
 
     $('.to-robots').on('click', function() {
-            console.log("working")
         let userId= $(this).data("user-id")
-        console.log(userId)
         window.location.href= "/users/" + userId
        
     });
