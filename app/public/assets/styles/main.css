@@ -12,10 +12,12 @@ h1 {
 h1, h2, h3, h5, h6 {
     font-weight: bold;
     color: rgb(197, 197, 148);
+    text-shadow: 4px 4px black;
 }
 h4{
     font-weight: bold;
-    color: #1d1d1c;
+    color: rgb(197, 197, 148);
+    text-shadow: 4px 4px black;
 }
 #create-account {
     margin-left: 1rem;
@@ -30,6 +32,8 @@ h4{
 }
 p {
     font-weight: bold;
+    color: rgb(197, 197, 148);
+    text-shadow: 3px 3px black;
 
 }
 .hidden {
@@ -37,7 +41,8 @@ p {
 }
 .card {
     width: 550px;
-    background-image: linear-gradient(to bottom right, rgb(97, 93, 93), rgb(29, 29, 23));
+    /* background-image: linear-gradient(to bottom right, rgb(97, 93, 93), rgb(29, 29, 23)); */
+    background-image: url("http://www.ceed-jd.ru/wp-content/uploads/2015/03/212_87569-2560x1600-1024x640.jpg");
     opacity: .9;
     border-top-left-radius: 7px;
     border-top-right-radius: 5px;
