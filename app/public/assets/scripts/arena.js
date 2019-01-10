@@ -108,3 +108,27 @@ function loseCondition(user) {
         console.log(data);
     });
 }
+
+// var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=x8yAyu1xp1MRX1C3aQjtJahAr5047i7j&q=gundam";
+        
+
+//         // Creating an AJAX call for the specific animal button being clicked
+//         $.ajax({
+//           url: queryURL,
+//           method: "GET"
+//         }).then(function(response) {
+//           console.log(response)
+
+//           // Retrieving the URL for the image
+//           var imgURL = response.images.fixed_height.url;
+
+//           // Creating an element to hold the image
+//           var image = $("<img>").attr("src", imgURL);
+
+//           // Appending the image
+//           animalDiv.append(image);
+              
+//           // Putting the entire animal above the previous animals
+//           $(".video-container").prepend(animalDiv);
+
+//         });

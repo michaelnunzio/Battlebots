@@ -7,6 +7,23 @@ h1 {
     /* color:black; */
     font-family: chunkfive;
     font-weight: bold;
+    color: rgb(197, 197, 148);
+
+  animation-name: example;
+  animation: example 20s infinite;
+}
+
+/* Standard syntax */
+@keyframes example {
+  0% {color: rgb(197, 197, 148);}
+  25% {color: #b7410e}
+  50% {color: slategray;}
+  75% {color: darkslategrey}
+  100% {color: rgb(197, 197, 148);}
+}
+
+.black {
+    background-image: url("http://www.ceed-jd.ru/wp-content/uploads/2015/03/212_87569-2560x1600-1024x640.jpg");
 }
 
 h1, h2, h3, h5, h6 {
@@ -53,6 +70,12 @@ p {
 .btn{
     background-color:   #b7410e;
 }
+
+.btn-flat{
+    color: black;
+    background: #b7410e;
+}
+
 .card:hover {
     opacity: 1;
 }
