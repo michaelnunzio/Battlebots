@@ -10,39 +10,41 @@ h1 {
 h1, h2, h3, h5, h6 {
     font-weight: bold;
     color: rgb(197, 197, 148);
-    background: #b7410e15;
 }
 h4{
     font-weight: bold;
     color: #1d1d1c;
-    background: #b7410e15;
 }
 #create-account {
     margin-left: 1rem;
     color: black;
 }
-
+.battleBots {
+    color: #b7410e
+}
 .validation-text {
     font-size: .8rem;
     color: red;
 }
 p {
     font-weight: bold;
-    background: #b7410e15;
+
 }
 .hidden {
     display: none;
 }
 .card {
     width: 550px;
-    background: url("https://imgc.artprintimages.com/img/print/peeling-and-flaking-paint-on-a-rusted-steel-surface_u-l-q10x7oj0.jpg?h=550&w=550") no-repeat;
+    background-image: linear-gradient(to bottom right, rgb(97, 93, 93), rgb(29, 29, 23));
     opacity: .9;
-
-  
-        border-top-left-radius: 7px;
-        border-top-right-radius: 5px;
-        border-bottom-right-radius: 6px;
-        border-bottom-left-radius: 8px;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 8px;
+    transition: 0.2s ease-in-out;
+}
+.btn{
+    background-color:   #b7410e;
 }
 .card:hover {
     opacity: 1;
@@ -54,11 +56,14 @@ p {
 .to-robots:hover {
     background: #b7410e;
 }
-
+.btn:hover{
+    background: #b7410e;
+}
 /* dual color button change */
 
 .dualcolorbutton{
     border: 1px solid;
+ transition: 0.2s ease-in-out;
  background: #b7410e; /* default button background color */
  display: inline-block; /* set to block or inline-block */
  padding: 10px 15px;
@@ -107,10 +112,37 @@ p {
 
 /* dual color botton change ending */
 
-table {
-    background-color: lightgrey;
+/* modal content css */
+
+.modalGradientBackground {
+    background-image: linear-gradient(to bottom right, rgb(97, 93, 93), rgb(29, 29, 23));
+}
+.modalGradientFooter {
+    background-image: linear-gradient( rgb(97, 93, 93), rgb(29, 29, 23));
+}
+    table {
+    background-image: linear-gradient(to bottom right, rgb(97, 93, 93), rgb(29, 29, 23));
 }
 
 th, td {
-    color: yellow;
+    color: rgb(197, 197, 148);
+}
+/* login password field */
+#username {
+    background-color: #b7410e;
+    opacity: .4;
+}
+#password {
+    background-color: #b7410e;
+    opacity: .4;
+}
+/* initial Background Image */
+.backGroundImage{
+	background-image:url("https://i.pinimg.com/originals/2f/6b/32/2f6b32ea73be423a9ecb2acab6ca8a71.jpg");
+    height: 100%;
+    width:100%;
+    background-repeat: auto;
+    background-size: 100%;
+    background-position: top;
+    background-attachment: fixed;
 }

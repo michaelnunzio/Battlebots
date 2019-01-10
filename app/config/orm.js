@@ -22,7 +22,7 @@ function selectFromWhere(table, obj, callback) {
     let where = objToWhere(obj);
     let queryString = 'SELECT * FROM ?? WHERE ' + where + ';';
 
-    let query = connection.query(queryString, [table, where], function(err, results) {
+    connection.query(queryString, [table, where], function(err, results) {
         if (err) throw err;
         
         if(typeof callback === 'function') callback(results);
@@ -43,12 +43,11 @@ function updateTable(table, update, obj, callback) {
     let where = objToWhere(obj);
     let queryString = 'UPDATE ?? SET ? WHERE ' + where + ';';
 
-    let sql = connection.query(queryString, [table, update, where], (err, results) => {
+    connection.query(queryString, [table, update, where], (err, results) => {
         if(err) throw err;
 
         if(typeof callback === 'function') callback(results);
     });
-    console.log(sql.query);
 }
 
 function deleteFromWhere(table, obj, callback) {
