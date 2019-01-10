@@ -3,16 +3,16 @@ $('document').ready(() => {
 
     $('.easyBattle').on('click', function() {
 
-            let id = $(this).data('userID');
-            let name = $(this).data('userName');
-            let attack = $(this).data("userAtk");
-            let defense = $(this).data("userDef");
+            let id = $(this).data('userid');
+            let name = $(this).data('username');
+            let attack = $(this).data("useratk");
+            let defense = $(this).data("userdef");
 
             let user = {user_id: id, name: name, attack: attack, defense: defense};
 
-            let enemyName= $(this).data('enemyName');
-            let enemyAtk= $(this).data('enemyAtk');
-            let enemyDef= $(this).data('enemyDef');
+            let enemyName= $(this).data('enemyname');
+            let enemyAtk= $(this).data('enemyatk');
+            let enemyDef= $(this).data('enemydef');
 
             let enemy = {name: enemyName, attack: enemyAtk, defense: enemyDef};
 
@@ -88,7 +88,7 @@ function winCondition(user) {
     winMessage.text(user.name + ' wins!');
     $('#modal-battle-end').append(winMessage);
     $.ajax({
-        url: 'arena/' + user.id,
+        url: '/users/arena/' + user.user_id,
         method: 'POST',
         data: {victory: true, winnings: 20}
     }).then(data => {
@@ -101,7 +101,7 @@ function loseCondition(user) {
     loseMessage.text(user.name + ' is defeated!');
     $('#modal-battle-end').append(loseMessage);
     $.ajax({
-        url: 'arena/' + user.id,
+        url: '/users/arena/' + user.user_id,
         method: 'POST',
         data: {victory: false, winnings: 5}
     }).then(data => {
