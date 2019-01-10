@@ -1,5 +1,10 @@
 const orm = require('./../config/orm');
 
+function getUser(userId, callback) {
+    let where = {id: userId};
+    orm.selectFromWhere('users', where, callback);
+}
+
 function checkUsernameExists(user, exists, notexists) {
     orm.selectFromWhereCol('users', 'username', user.username, results => {
         if (typeof exists !== 'function' || typeof notexists !== 'function') return;
@@ -9,7 +14,7 @@ function checkUsernameExists(user, exists, notexists) {
 
 function login(user, success, failure) {
     orm.selectFromWhere('users', user, results => {
-        results.length > 0 ? success(results) : failure(results);
+        results.length === 1 ? success(results) : failure(results);
     });
 }
 
@@ -129,6 +134,7 @@ function updateBattleResults(userId, victory, callback) {
 }
 
 module.exports = {
+    getUser: getUser,
     checkUsernameExists: checkUsernameExists,
     login: login,
     createAccount: createAccount,

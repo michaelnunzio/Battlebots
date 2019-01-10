@@ -1,5 +1,7 @@
 const express = require('express');
 const handlebars = require('express-handlebars');
+const passport = require('passport');
+const session = require('express-session');
 const path = require('path');
 
 const userController = require('./app/controllers/user-controller');
@@ -8,6 +10,8 @@ const storeController = require('./app/controllers/store-controller');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
+
+require('./app/config/passport')(passport);
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -21,6 +25,17 @@ app.engine("handlebars", handlebars({
 
 app.set("view engine", "handlebars");
 app.set('views', path.join(__dirname, 'app', 'views'));
+
+app.use(
+    session({
+        secret: 'secret',
+        resave: true,
+        saveUninitialized: true
+    })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', userController);
 app.use('/users', robotBayController);

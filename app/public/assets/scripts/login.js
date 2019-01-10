@@ -18,7 +18,7 @@ $('document').ready(() => {
         }
 
         $.ajax({
-            url: '/users',
+            url: '/login',
             type: 'POST',
             data: user
         }).then(data => {
@@ -45,7 +45,7 @@ $('document').ready(() => {
         }
 
         $.ajax({
-            url: '/users',
+            url: '/create-account',
             type: 'POST',
             data: user
         }).then(data => {
