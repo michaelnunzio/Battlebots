@@ -154,14 +154,62 @@ router.post('/createBot/:userid',(req, res) =>{
 router.get('/arena/:userid/:robotid', (req, res) =>{
     let userId = req.params.userid;
     let robotId = req.params.robotid;
-    // let response = {user_id: userId, robot_id: robotId};
+    let response = {user_id: userId, robot_id: robotId};
 
-    Robot.getUserSingleRobotStats(userId, robotId, results=>{
-        console.log(results[0])
-        res.render('arena', results[0]);
+    
+//**parallel** */
+    async.parallel({
+        userRobot: function(callback) {
+            Robot.getUserSingleRobotStats(userId, robotId, results=>{
+                response.userRobot = results[0];
+                callback(null, response);
+            })
+        },
+        robotStats: function(callback) {
+            Robot.getUserRobotsStats(2, (results) => {
+                response.enemyRobots = results;
+                callback(null, response);
+            });
+        }
+    },
+    (err, results) => {
+        if(err) throw err;
+        console.log(response);
+        res.render('arena', response);
+    });
+    //**parallel** */
 
-    })
 
+});
+
+router.post('/arena/:userid', (req, res) => {
+    let userId = req.params.userid;
+    console.log(userId);
+    let victory = req.body.victory;
+    let winnings = req.body.winnings;
+    console.log(victory, winnings);
+    let response = {};
+
+    async.series([
+        function(callback) {
+            User.updateWallet(userId, winnings, (walletResults) => {
+                if(walletResults.error) callback(walletResults, 'one');
+                else {
+                    response.wallet = walletResults;
+                    callback(null, response);
+                }
+            });
+        },
+        function(callback) {
+            User.updateBattleResults(userId, victory, (battleResults) => {
+                response.battleResults = battleResults;
+                callback(null, response);
+            });
+        }
+    ], function(err, response) {
+        if(err) res.send(err);
+        else res.send(response);
+    });
 
 });
 
