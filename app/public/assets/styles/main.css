@@ -3,8 +3,10 @@ h1 {
 }
 
 #title{
-    text-shadow: 8px 8px white;
+    text-shadow: 8px 8px black;
     /* color:black; */
+    font-family: chunkfive;
+    font-weight: bold;
 }
 
 h1, h2, h3, h5, h6 {
