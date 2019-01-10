@@ -3,37 +3,20 @@ $('document').ready(() => {
 
     $('.easyBattle').on('click', function() {
 
-            let name= $(this).data("name-id")
-            let attack= $(this).data("attack-id")
-            let defense= $(this).data("defense-id")
+            let id = $(this).data('userid');
+            let name = $(this).data('username');
+            let attack = $(this).data("useratk");
+            let defense = $(this).data("userdef");
 
-            let user = {name: name, attack: attack, defense: defense};
+            let user = {user_id: id, name: name, attack: attack, defense: defense};
 
-            let enemyName= "Easy Bot"
-            let enemyAtk= 40
-            let enemyDef= 9
+            let enemyName= $(this).data('enemyname');
+            let enemyAtk= $(this).data('enemyatk');
+            let enemyDef= $(this).data('enemydef');
 
             let enemy = {name: enemyName, attack: enemyAtk, defense: enemyDef};
 
             fightBots(user, enemy);
-
-            // if(enemyTotal > UserTotal){
-            //     var loser = "You Lose!!"
-            //     console.log(loser)
-            //     $("#modal-battle-end").html(loser)
-            //     $("#money-gainz").html("You Lost.. You'll Get Em' Next Time. You Earned: ") //add money- put to database
-            // }else if(UserTotal > enemyTotal){
-            //     var winner = "You Won!!"
-            //     console.log(winner)
-            //     $("#modal-battle-end").html(winner)
-            //     $("#money-gainz").html("Victory! You Earned: ") //add money- put to database
-            // }
-            //****MODAL****//
-            
-            // Get the button that opens the modal
-            // When the user clicks on the button-->
-            
-            //****MODAL****//
 
     }); //easy end
 
@@ -104,10 +87,24 @@ function winCondition(user) {
     let winMessage = $('<h3>');
     winMessage.text(user.name + ' wins!');
     $('#modal-battle-end').append(winMessage);
+    $.ajax({
+        url: '/users/arena/' + user.user_id,
+        method: 'POST',
+        data: {victory: true, winnings: 20}
+    }).then(data => {
+        console.log(data);
+    });
 }
 
 function loseCondition(user) {
     let loseMessage = $('<h3>');
     loseMessage.text(user.name + ' is defeated!');
     $('#modal-battle-end').append(loseMessage);
+    $.ajax({
+        url: '/users/arena/' + user.user_id,
+        method: 'POST',
+        data: {victory: false, winnings: 5}
+    }).then(data => {
+        console.log(data);
+    });
 }

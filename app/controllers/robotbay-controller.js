@@ -182,4 +182,35 @@ router.get('/arena/:userid/:robotid', (req, res) =>{
 
 });
 
+router.post('/arena/:userid', (req, res) => {
+    let userId = req.params.userid;
+    console.log(userId);
+    let victory = req.body.victory;
+    let winnings = req.body.winnings;
+    console.log(victory, winnings);
+    let response = {};
+
+    async.series([
+        function(callback) {
+            User.updateWallet(userId, winnings, (walletResults) => {
+                if(walletResults.error) callback(walletResults, 'one');
+                else {
+                    response.wallet = walletResults;
+                    callback(null, response);
+                }
+            });
+        },
+        function(callback) {
+            User.updateBattleResults(userId, victory, (battleResults) => {
+                response.battleResults = battleResults;
+                callback(null, response);
+            });
+        }
+    ], function(err, response) {
+        if(err) res.send(err);
+        else res.send(response);
+    });
+
+});
+
 module.exports = router;
