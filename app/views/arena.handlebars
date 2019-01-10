@@ -28,21 +28,28 @@
 
             <div class="card grey">
              <div class="row center-align">
-                    <h4>robot name:{{name}}</h4>
-                <p>Attack rating: {{total_damage}}</p>
-                <p>Defense rating: {{total_armor}}</p>
+                    <h4>robot name:{{userRobot.name}}</h4>
+                <p>Attack rating: {{userRobot.total_damage}}</p>
+                <p>Defense rating: {{userRobot.total_armor}}</p>
             </div>  
             </div>
  
 
+            <h3>Enemy Robots: </h3>
+                {{#each enemyRobots}}
             <div class="card grey">
              <div class="row center-align">
-                 <h3>Enemy Robots</h3>
-                    <h4>Robot Name: Easy Bot</h4>
-                    <div class="btn dualcolorbutton easyBattle" data-attack-id="{{total_damage}}" 
-                    data-defense-id="{{total_armor}}" data-name-id="{{name}}"> BattleBot</div>
+             
+                    <h4>Robot Name: {{name}}</h4>
+                <p>Attack rating: {{total_damage}}</p>
+                <p>Defense rating: {{total_armor}}</p>
+                    <div class="btn dualcolorbutton easyBattle" data-enemyAtk="{{total_damage}}" 
+                    data-enemyDef="{{total_armor}}" data-enemyName="{{name}}" 
+                    data-userAtk="{{../userRobot.total_damage}}" data-userDef="{{../userRobot.total_armor}}" 
+                    data-userID="{{../userRobot.user_id}}" data-userName="{{../userRobot.name}}"> BattleBot</div>
             </div>  
             </div>
+                {{/each}}
 
                   <div class="btn to-robots" data-user-id="{{user_id}}">Back</div>
 
