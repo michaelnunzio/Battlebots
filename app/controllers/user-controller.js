@@ -30,6 +30,7 @@ router.post('/login', (req, res, next) => {
 });
 
 router.post('/create-account', (req, res) => {
+    let user = req.body;
     let response = {};
         async.series([
             function(callback) {
