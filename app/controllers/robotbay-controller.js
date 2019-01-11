@@ -4,11 +4,11 @@ const fs = require('fs');
 const path = require('path');
 const Robot = require('./../models/robot');
 const User = require('./../models/user');
-const enemyBots= require('./../models/opponents') //delete later
+const {ensureAuthenticated} = require("../config/auth");
 
 const router = express.Router();
 
-router.get('/:id', (req, res) => {
+router.get('/:id', ensureAuthenticated, (req, res) => {
     let userId = req.params.id;
     let response = {user_id: userId};
     async.parallel({
@@ -27,13 +27,12 @@ router.get('/:id', (req, res) => {
     },
     (err, results) => {
         if(err) throw err;
-        console.log(response);
         res.render('robots', response);
     });
     
 });
 
-router.get('/configuration/:userid/:robotid', (req, res) => {
+router.get('/configuration/:userid/:robotid', ensureAuthenticated, (req, res) => {
     let userId = req.params.userid;
     let robotId = req.params.robotid;
 
@@ -60,7 +59,7 @@ router.get('/configuration/:userid/:robotid', (req, res) => {
     
 });
 
-router.get('/inventory/:userid', (req, res) => {
+router.get('/inventory/:userid', ensureAuthenticated, (req, res) => {
     let userId = req.params.userid;
     let robotId = req.query.robotId;
     let positionId = req.query.positionId;
@@ -97,7 +96,7 @@ router.get('/inventory/:userid', (req, res) => {
 
 });
 
-router.put('/robot/:robotid', (req, res) => {
+router.put('/robot/:robotid', ensureAuthenticated, (req, res) => {
     let robotId = req.params.robotid;
     let partId = req.body.partId;
     let positionId = req.body.positionId;
@@ -107,7 +106,7 @@ router.put('/robot/:robotid', (req, res) => {
     
 });
 
-router.post('/robot/:robotid', (req, res) => {
+router.post('/robot/:robotid', ensureAuthenticated, (req, res) => {
     let robotId = req.params.robotid;
     let userId = req.body.userId;
     let partId = req.body.partId;
@@ -117,7 +116,7 @@ router.post('/robot/:robotid', (req, res) => {
     });
 });
 
-router.delete('/robot/:robotid', (req, res) => {
+router.delete('/robot/:robotid', ensureAuthenticated, (req, res) => {
     let robotId = req.params.robotid;
     let positionId = req.body.position_id;
 
@@ -130,7 +129,7 @@ router.delete('/robot/:robotid', (req, res) => {
 
 //**for create new robot */
 
-router.get('/createBot/:userid', function(req, res) {
+router.get('/createBot/:userid', ensureAuthenticated, function(req, res) {
     let userId = req.params.userid;
     let response = {user_id: userId};
 
@@ -140,7 +139,7 @@ router.get('/createBot/:userid', function(req, res) {
 //****POST****/
 //**unncomment out below */
 
-router.post('/createBot/:userid',(req, res) =>{
+router.post('/createBot/:userid', ensureAuthenticated, (req, res) =>{
     let name= req.body.name;
     let userID = req.params.userid;
 
@@ -151,7 +150,7 @@ router.post('/createBot/:userid',(req, res) =>{
 
 //**get for battlebot arena**//
 
-router.get('/arena/:userid/:robotid', (req, res) =>{
+router.get('/arena/:userid/:robotid', ensureAuthenticated, (req, res) =>{
     let userId = req.params.userid;
     let robotId = req.params.robotid;
     let response = {user_id: userId, robot_id: robotId};
@@ -174,7 +173,6 @@ router.get('/arena/:userid/:robotid', (req, res) =>{
     },
     (err, results) => {
         if(err) throw err;
-        console.log(response);
         res.render('arena', response);
     });
     //**parallel** */
@@ -182,12 +180,10 @@ router.get('/arena/:userid/:robotid', (req, res) =>{
 
 });
 
-router.post('/arena/:userid', (req, res) => {
+router.post('/arena/:userid', ensureAuthenticated, (req, res) => {
     let userId = req.params.userid;
-    console.log(userId);
     let victory = req.body.victory;
     let winnings = req.body.winnings;
-    console.log(victory, winnings);
     let response = {};
 
     async.series([
