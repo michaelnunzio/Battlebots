@@ -176,3 +176,17 @@ th, td {
     background-position: top;
     background-attachment: fixed;
 }
+
+.video-container{
+    /* left: 30%; */
+    background-image: url("http://www.ceed-jd.ru/wp-content/uploads/2015/03/212_87569-2560x1600-1024x640.jpg");
+}
+
+
+img {
+    width: 100%;
+    height: 500px;
+    /* margin-left: 26%; */
+    /* margin-top: 10px; */
+
+}

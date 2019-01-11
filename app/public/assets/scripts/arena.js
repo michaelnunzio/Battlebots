@@ -107,26 +107,32 @@ function loseCondition(user) {
     });
 }
 
-// var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=x8yAyu1xp1MRX1C3aQjtJahAr5047i7j&q=gundam";
+var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=x8yAyu1xp1MRX1C3aQjtJahAr5047i7j&q=gundam-fight";
         
 
-//         // Creating an AJAX call for the specific animal button being clicked
-//         $.ajax({
-//           url: queryURL,
-//           method: "GET"
-//         }).then(function(response) {
-//           console.log(response)
+        // Creating an AJAX call for the specific animal button being clicked
+        $.ajax({
+          url: queryURL,
+          method: "GET"
+        }).then(function(response) {
+          console.log(response)
+          var botDiv = $("<div class='gundam'>");
 
-//           // Retrieving the URL for the image
-//           var imgURL = response.images.fixed_height.url;
+          // Retrieving the URL for the image
+        //   for(var i=1; i < 10; i++ ){
+          var imgURL = response.data[4].images.fixed_height.url;
+          
+        // }
 
-//           // Creating an element to hold the image
-//           var image = $("<img>").attr("src", imgURL);
+          // Creating an element to hold the image
+          var image = $("<img>").attr("src", imgURL);
 
-//           // Appending the image
-//           animalDiv.append(image);
+          // Appending the image
+          botDiv.append(image);
               
-//           // Putting the entire animal above the previous animals
-//           $(".video-container").prepend(animalDiv);
+          // Putting the entire animal above the previous animals
+          $(".video-container").prepend(botDiv);
 
-//         });
+        });
+
+        //giphy api
