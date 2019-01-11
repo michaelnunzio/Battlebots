@@ -1,6 +1,6 @@
 DELETE FROM users;
 INSERT INTO users (username, password)
-VALUES ('bob', '1234'),
+VALUES ('bob', '$2a$10$Ejaj5BuG2WGh8GtUPWwWl.hMNFCN5VDnEzYgwqNec0FZMKA5fxS9u'),
 ('Computer', '1234');
 
 INSERT INTO user_wallets (user_id, amount)

@@ -1,4 +1,5 @@
 const orm = require('./../config/orm');
+const bcrypt = require('bcryptjs');
 
 function getUser(userId, callback) {
     let where = {id: userId};
@@ -13,16 +14,46 @@ function checkUsernameExists(user, exists, notexists) {
 }
 
 function login(user, success, failure) {
-    orm.selectFromWhere('users', user, results => {
-        results.length === 1 ? success(results) : failure(results);
+    let where = {username: user.username};
+    orm.selectFromWhere('users', where, results => {
+        if(results.length === 1) {
+            bcrypt.compare(user.password, results[0].password, (err, match) => {
+                if(err) throw err;
+
+                if(match) success(results);
+                else {
+                    let error = {
+                        error: true,
+                        message: 'Invalid password'
+                    };
+                    failure(error);
+                }
+            });
+        } else {
+            let error = {
+                error: true,
+                message: 'Username not found'
+            };
+            failure(error);
+        }
     });
 }
 
 function createAccount(user, success, failure) {
     checkUsernameExists(user, failure , () => {
-        orm.insertObject('users', user, results => {
-            results.affectedRows > 0 ? success(results) : failure(results);
+        //hash user provided password
+        bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(user.password, salt, (err, hash) => {
+                if(err) throw err;
+
+                userHash = {username: user.username, password: hash};
+                orm.insertObject('users', userHash, results => {
+                    results.affectedRows > 0 ? success(results) : failure(results);
+                });
+            });
         });
+
+        
     })
     
 }
@@ -116,18 +147,15 @@ function createUserBattleResults(userId, callback) {
 
 function updateBattleResults(userId, victory, callback) {
     let where = {user_id: userId};
-    console.log('User won: ' + victory, typeof victory);
 
     orm.selectFromWhere('user_battle_results', where, (results) => {
         if(victory === 'true') {
             let newWins = results[0].wins + 1;
             let wins = {wins: newWins};
-            console.log('Updating wins to ' + newWins);
             orm.updateTable('user_battle_results', wins, where, callback);
         } else {
             let newLosses = results[0].losses + 1;
             let losses = {losses: newLosses};
-            console.log('Updating losses to ' + newLosses);
             orm.updateTable('user_battle_results', losses, where, callback);
         }
     }); 
