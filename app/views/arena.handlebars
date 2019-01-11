@@ -1,21 +1,24 @@
 <div class="container-fluid">
 
       <!-- Modal Structure -->
+  <div class= "row">
   <div id="arena-modal" class="modal">
     <div id="modal-name"></div>
         <div id="modal-stats"></div>     
-    
-      <div class="video-container">
-        <iframe width="853" height="480" src="//www.youtube.com/embed/Q8TXgCzxEnw?rel=0" frameborder="0" allowfullscreen></iframe>
-      </div>
         
-        <div id="modal-battle-end"></div> <!-- You Win / Lose -->
-        <div id="money-gainz"></div>
-        <div id="modal-combat-log"></div> <!-- what you have vs them-->
-    <div class="modal-footer">
+        <div id="modal-battle-end" class="black"></div> <!-- You Win / Lose -->
+        <div id="money-gainz" class="black"></div>
+        <div id="modal-combat-log" class="black"></div> <!-- what you have vs them-->
+
+            <div class="video-container">
+        {{!-- <iframe width="853" height="480" src="https://media.giphy.com/media/lDrb6a9gJySFW/giphy.mp4" frameborder="0" allowfullscreen></iframe> --}}
+      </div>
+
+    <div class="modal-footer black">
       <a href="#!" class="modal-close waves-effect waves-green btn-flat to-robots" data-user-id="{{user_id}}">Return To Bay</a>
     </div>
   </div>
+  </div> <!--MoDAL ROW END-->
 
     <div class="card grey">
       <div class="row center-align">
@@ -28,7 +31,7 @@
 
             <div class="card grey">
              <div class="row center-align">
-                    <h4>robot name:{{userRobot.name}}</h4>
+                    <h4>Robot Name: {{userRobot.name}}</h4>
                 <p>Attack rating: {{userRobot.total_damage}}</p>
                 <p>Defense rating: {{userRobot.total_armor}}</p>
             </div>  
@@ -56,20 +59,6 @@
     </div>
 
     <script src="/assets/scripts/arena.js"></script>
-
-
-        
-
-
-
-
-
-
-
-
-
-
-
 
 
 </div>  <!--cont end-->
