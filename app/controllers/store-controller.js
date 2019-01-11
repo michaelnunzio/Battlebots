@@ -4,10 +4,11 @@ const fs = require('fs');
 const path = require('path');
 const User = require('../models/user');
 const Store = require('../models/store');
+const {ensureAuthenticated} = require("../config/auth");
 
 const router = express.Router();
 
-router.get('/:userid', (req, res) => {
+router.get('/:userid', ensureAuthenticated, (req, res) => {
     let userId = req.params.userid;
     let response = {user_id: userId};
     async.parallel({
@@ -36,7 +37,7 @@ router.get('/:userid', (req, res) => {
     
 });
 
-router.post('/:userid', (req, res) => {
+router.post('/:userid', ensureAuthenticated, (req, res) => {
     let userId = req.params.userid;
     let {part_id, cost, quantity} = req.body;
     let totalCost = parseFloat(cost) * parseInt(quantity) * -1;
